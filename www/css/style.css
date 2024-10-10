@@ -68,5 +68,9 @@
     body{
         background-color: aqua;
     }
+
+    button{
+        color: blue;
+    }
     
     input[type=number] {text-align: right;}
