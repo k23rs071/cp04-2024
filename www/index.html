@@ -155,6 +155,10 @@ var startTime=0;
 var period=0;
 var rest=0;
 var etime=0;
+var m=parseInt(rest/60);
+var s=parseInt(rest-m*60);
+var stop=0;
+var secondstop=0;
 
     
     // ボタンの初期設定
@@ -162,6 +166,7 @@ var etime=0;
         $('#btnA').prop('disabled', false);
         $('#btnB').prop('disabled', false);
         $('#btnC').prop('disabled', false);
+        btnCClick(null);
         
     }
 
@@ -183,7 +188,14 @@ var etime=0;
     // ButtonAがクリックされた時の処理
     function btnAClick(e){
         active=true;
-        startTime=new Date();
+        //startTime=new Date();
+        if(rest==0){
+            startTime=new Date();
+        }else{
+            var buttonAstopTime=new Date();
+            stop=buttonAstopTime-rest;
+        }
+
         
         
     }
@@ -191,6 +203,7 @@ var etime=0;
     // ButtonBがクリックされた時の処理
     function btnBClick(e){
         active=false;
+        rest=new Data();
         
         
     }
@@ -199,10 +212,11 @@ var etime=0;
     function btnCClick(e){
         alarm();
         active=false;
+        rest=0;
         period=60*parseInt($("#minute").val())+
         parseInt($("#second").val());
         $("#time").html("経過時間:0");
-        $("#remain").html("残り時間: "+period);
+        $("#remain").html("残り時間: "+period+"("+Math.trunc(rest/60)+"分"+(rest%60)+"秒"+")");
         
     }
     
@@ -213,9 +227,9 @@ var etime=0;
             etime=parseInt((new Date()-startTime)/1000);
             rest=period-etime;
             $("#time").html("経過時間: "+etime);
-            $("#remain").html("残り時間: "+rest);
+            $("#remain").html("残り時間: "+rest+"("+Math.trunc(rest/60)+"分"+(rest%60)+"秒"+")");
             analog(rest);
-
+            
             if(rest<=0){
                 active=false;
                 alarm();
@@ -224,7 +238,7 @@ var etime=0;
         
         
     } 
-
+    
   </script>
 </head>
 <body>
@@ -238,6 +252,7 @@ var etime=0;
     <button id="btnA">Start</button>  
     <button id="btnB">Stop</button>  
     <button id="btnC">Set</button> 
+    <button id="btnC">Set</button>
     <input type="number" id="minute" value=0 >
     <input type="number" id="second" value=15 >
 </body>
