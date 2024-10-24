@@ -74,7 +74,7 @@
     #second {
         font-size: 50px;
         position:absolute; top:450px; left:190px; width:80px; height:40px;   
-        color: darkblue;
+        color: rgb(236, 31, 255);
     }
 
     body{
